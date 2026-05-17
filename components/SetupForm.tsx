@@ -270,4 +270,3 @@ export default function SetupForm({ onSubmit, loading }: Props) {
     </motion.div>
   )
 }
- | Set-Content -Path "components\SetupForm.tsx" -Encoding UTF8
