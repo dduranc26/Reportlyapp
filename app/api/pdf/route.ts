@@ -27,7 +27,7 @@ export async function POST(req: NextRequest) {
 
     const filename = `reportly-${report.setup.clientName.toLowerCase().replace(/\s+/g, '-')}-${report.setup.periodo}d.pdf`
 
-    return new NextResponse(pdf, {
+    return new NextResponse(pdf as unknown as BodyInit, {
       headers: {
         'Content-Type':        'application/pdf',
         'Content-Disposition': `attachment; filename="${filename}"`,
@@ -35,4 +35,6 @@ export async function POST(req: NextRequest) {
     })
   } catch (err: unknown) {
     console.error('[/api/pdf]', err)
-    return new NextResponse(pdf as unknown as BodyInit, {
+    return NextResponse.json({ success: false, error: 'Error generando PDF' }, { status: 500 })
+  }
+}
