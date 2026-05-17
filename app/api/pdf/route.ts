@@ -35,6 +35,4 @@ export async function POST(req: NextRequest) {
     })
   } catch (err: unknown) {
     console.error('[/api/pdf]', err)
-    return NextResponse.json({ success: false, error: 'Error generando PDF' }, { status: 500 })
-  }
-}
+    return new NextResponse(pdf as unknown as BodyInit, {
