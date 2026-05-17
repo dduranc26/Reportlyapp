@@ -33,8 +33,8 @@ export default function Scene3D() {
     window.addEventListener('mousemove', onMouseMove)
 
     // ── Floating triangles ───────────────────────────────────
-    const triangles: {
-      mesh:    THREE.Mesh
+  const triangles: {
+  mesh:    THREE.Mesh | THREE.LineLoop
       speed:   THREE.Vector3
       rotSpd:  THREE.Vector3
       basePos: THREE.Vector3
