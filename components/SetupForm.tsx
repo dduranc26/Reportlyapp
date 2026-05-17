@@ -1,5 +1,4 @@
-﻿@'
-'use client'
+﻿'use client'
 
 import { useState } from 'react'
 import { motion } from 'framer-motion'
@@ -271,4 +270,4 @@ export default function SetupForm({ onSubmit, loading }: Props) {
     </motion.div>
   )
 }
-'@ | Set-Content -Path "components\SetupForm.tsx" -Encoding UTF8
+ | Set-Content -Path "components\SetupForm.tsx" -Encoding UTF8
