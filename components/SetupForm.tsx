@@ -1,4 +1,5 @@
-﻿'use client'
+﻿@'
+'use client'
 
 import { useState } from 'react'
 import { motion } from 'framer-motion'
@@ -33,16 +34,6 @@ const PERIODOS: { value: Periodo; label: string }[] = [
   { value: '14', label: 'Últimos 14 días' },
   { value: '30', label: 'Últimos 30 días' },
 ]
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 24 },
-  show:   { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.16,1,0.3,1] } }
-}
-
-const stagger = {
-  hidden: {},
-  show:   { transition: { staggerChildren: 0.09 } }
-}
 
 export default function SetupForm({ onSubmit, loading }: Props) {
   const [agencyName, setAgencyName] = useState('')
@@ -90,17 +81,16 @@ export default function SetupForm({ onSubmit, loading }: Props) {
   }
 
   return (
-    <motion.div variants={stagger} initial="hidden" animate="show">
+    <motion.div initial="hidden" animate="show"
+      variants={{ hidden: {}, show: { transition: { staggerChildren: 0.09 } } }}>
 
-      {/* Hero */}
-      <motion.div variants={fadeUp} className="mb-12">
+      <motion.div className="mb-12"
+        variants={{ hidden: { opacity:0, y:24 }, show: { opacity:1, y:0, transition: { duration:0.6 } } }}>
         <motion.div
-          initial={{ opacity:0, scale:0.9 }}
-          animate={{ opacity:1, scale:1 }}
+          initial={{ opacity:0, scale:0.9 }} animate={{ opacity:1, scale:1 }}
           transition={{ duration:0.5 }}
           className="inline-flex items-center gap-2 px-3 py-1.5 mb-6"
-          style={{ background:'rgba(196,163,90,0.12)', border:'0.5px solid rgba(196,163,90,0.35)', borderRadius:'2px' }}
-        >
+          style={{ background:'rgba(196,163,90,0.12)', border:'0.5px solid rgba(196,163,90,0.35)' }}>
           <Sparkles size={10} style={{ color:'#C4A35A' }} />
           <span style={{ fontSize:'10px', letterSpacing:'0.12em', textTransform:'uppercase', color:'#9B4819', fontWeight:500 }}>
             Powered by IA · Demo gratuita
@@ -108,92 +98,76 @@ export default function SetupForm({ onSubmit, loading }: Props) {
         </motion.div>
 
         <motion.h1
-          variants={fadeUp}
-          className="font-display text-[#0A0A0A] mb-6"
-          style={{ fontSize:'clamp(2.8rem,6vw,3.8rem)', lineHeight:1.05 }}
-        >
+          variants={{ hidden: { opacity:0, y:24 }, show: { opacity:1, y:0, transition: { duration:0.6 } } }}
+          style={{ fontFamily:'var(--font-display)', fontSize:'clamp(2.8rem,6vw,3.8rem)', lineHeight:1.05, color:'#0A0A0A', marginBottom:'24px' }}>
           Tu cliente merece<br />
           <span className="relative inline-block">
             un informe mejor.
             <motion.svg
-              initial={{ pathLength:0, opacity:0 }}
-              animate={{ pathLength:1, opacity:1 }}
-              transition={{ duration:1.2, delay:0.6, ease:'easeInOut' }}
+              initial={{ pathLength:0, opacity:0 }} animate={{ pathLength:1, opacity:1 }}
+              transition={{ duration:1.2, delay:0.6 }}
               className="absolute -bottom-2 left-0 w-full" height="6"
-              viewBox="0 0 400 6" fill="none" preserveAspectRatio="none"
-            >
-              <motion.path
-                d="M0 4 Q100 0 200 4 Q300 8 400 4"
+              viewBox="0 0 400 6" fill="none" preserveAspectRatio="none">
+              <motion.path d="M0 4 Q100 0 200 4 Q300 8 400 4"
                 stroke="#C4A35A" strokeWidth="1.5" fill="none"
                 initial={{ pathLength:0 }} animate={{ pathLength:1 }}
-                transition={{ duration:1.2, delay:0.6 }}
-              />
+                transition={{ duration:1.2, delay:0.6 }} />
             </motion.svg>
           </span>
         </motion.h1>
 
-        <motion.p variants={fadeUp} style={{ fontSize:'15px', color:'#9A9490', lineHeight:1.7, maxWidth:'480px', marginBottom:'24px' }}>
+        <motion.p
+          variants={{ hidden: { opacity:0, y:24 }, show: { opacity:1, y:0, transition: { duration:0.6 } } }}
+          style={{ fontSize:'15px', color:'#9A9490', lineHeight:1.7, maxWidth:'480px', marginBottom:'24px' }}>
           Introduce los datos del cliente. La IA genera un informe profesional
           calibrado al sector — PDF descargable o link compartible en 30 segundos.
         </motion.p>
 
-        <motion.div variants={fadeUp} className="flex items-center gap-8">
+        <motion.div className="flex items-center gap-8"
+          variants={{ hidden: { opacity:0 }, show: { opacity:1, transition: { duration:0.6 } } }}>
           {[
-            { label:'30 segundos',      color:'#2D6A4F' },
-            { label:'PDF con tu logo',  color:'#C4A35A' },
-            { label:'Link para cliente',color:'#0A0A0A' },
+            { label:'30 segundos', color:'#2D6A4F' },
+            { label:'PDF con tu logo', color:'#C4A35A' },
+            { label:'Link para cliente', color:'#0A0A0A' },
           ].map((t,i) => (
             <motion.div key={t.label} className="flex items-center gap-2"
-              initial={{ opacity:0, x:-10 }}
-              animate={{ opacity:1, x:0 }}
-              transition={{ delay: 0.4 + i * 0.1 }}
-            >
-              <motion.div
-                animate={{ scale:[1,1.3,1] }}
+              initial={{ opacity:0, x:-10 }} animate={{ opacity:1, x:0 }}
+              transition={{ delay: 0.4 + i * 0.1 }}>
+              <motion.div animate={{ scale:[1,1.3,1] }}
                 transition={{ duration:2, delay: i*0.4, repeat:Infinity, repeatDelay:3 }}
-                style={{ width:'6px', height:'6px', borderRadius:'50%', background:t.color }}
-              />
+                style={{ width:'6px', height:'6px', borderRadius:'50%', background:t.color }} />
               <span style={{ fontSize:'12px', color:'#9A9490' }}>{t.label}</span>
             </motion.div>
           ))}
         </motion.div>
       </motion.div>
 
-      {/* Stats strip */}
-      <motion.div variants={fadeUp} className="grid grid-cols-3 mb-8"
+      <motion.div className="grid grid-cols-3 mb-8"
+        variants={{ hidden: { opacity:0, y:24 }, show: { opacity:1, y:0, transition: { duration:0.6 } } }}
         style={{ gap:'1px', background:'rgba(196,163,90,0.2)' }}>
         {[
           { num:'6-10h', label:'ahorradas por cliente/mes' },
           { num:'30s',   label:'para generar el informe' },
           { num:'100%',  label:'calibrado al sector' },
         ].map((s,i) => (
-          <motion.div key={s.num}
-            className="text-center px-5 py-4"
+          <motion.div key={s.num} className="text-center px-5 py-4"
             style={{ background:'rgba(255,255,255,0.55)', backdropFilter:'blur(8px)' }}
-            whileHover={{ background:'rgba(255,255,255,0.85)', y:-2, transition:{ duration:0.2 } }}
-          >
-            <motion.p
-              className="font-display text-[#0A0A0A] mb-0.5"
-              style={{ fontSize:'26px' }}
-              initial={{ opacity:0, y:10 }}
-              animate={{ opacity:1, y:0 }}
-              transition={{ delay: 0.3 + i*0.1 }}
-            >{s.num}</motion.p>
+            whileHover={{ background:'rgba(255,255,255,0.85)', y:-2 }}>
+            <p style={{ fontFamily:'var(--font-display)', fontSize:'26px', color:'#0A0A0A', marginBottom:'2px' }}>{s.num}</p>
             <p style={{ fontSize:'10px', color:'#9A9490', letterSpacing:'0.04em' }}>{s.label}</p>
           </motion.div>
         ))}
       </motion.div>
 
-      {/* Form */}
-      <motion.div variants={fadeUp}
+      <motion.div
+        variants={{ hidden: { opacity:0, y:24 }, show: { opacity:1, y:0, transition: { duration:0.6 } } }}
         style={{
-          background:'rgba(255,255,255,0.68)',
-          backdropFilter:'blur(20px)',
+          background:'rgba(255,255,255,0.68)', backdropFilter:'blur(20px)',
           border:'0.5px solid rgba(196,163,90,0.25)',
-          boxShadow:'0 4px 32px rgba(0,0,0,0.07), 0 1px 0 rgba(255,255,255,0.9), inset 0 1px 0 rgba(255,255,255,0.6)',
+          boxShadow:'0 4px 32px rgba(0,0,0,0.07), 0 1px 0 rgba(255,255,255,0.9)',
           padding:'32px',
-        }}
-      >
+        }}>
+
         <div style={{ marginBottom:'28px' }}>
           <p style={{ fontSize:'10px', letterSpacing:'0.12em', textTransform:'uppercase', color:'#9A9490', marginBottom:'16px' }}>
             Agencia y cliente
@@ -205,15 +179,10 @@ export default function SetupForm({ onSubmit, loading }: Props) {
             ].map(f => (
               <div key={f.id}>
                 <label style={{ fontSize:'12px', color:'#9A9490', display:'block', marginBottom:'6px' }}>{f.label}</label>
-                <motion.input
-                  type="text" value={f.val}
+                <motion.input type="text" value={f.val}
                   onChange={e => f.set(e.target.value)}
-                  onFocus={() => setFocused(f.id)}
-                  onBlur={() => setFocused('')}
-                  placeholder={f.ph}
-                  style={inputStyle(f.id)}
-                  whileFocus={{ scale:1.005 }}
-                />
+                  onFocus={() => setFocused(f.id)} onBlur={() => setFocused('')}
+                  placeholder={f.ph} style={inputStyle(f.id)} whileFocus={{ scale:1.005 }} />
               </div>
             ))}
           </div>
@@ -246,15 +215,11 @@ export default function SetupForm({ onSubmit, loading }: Props) {
           <div className="grid grid-cols-2 gap-4">
             <div>
               <label style={{ fontSize:'12px', color:'#9A9490', display:'block', marginBottom:'6px' }}>Presupuesto mensual (€) *</label>
-              <motion.input
-                type="number" value={budget}
+              <motion.input type="number" value={budget}
                 onChange={e=>setBudget(e.target.value)}
-                onFocus={()=>setFocused('budget')}
-                onBlur={()=>setFocused('')}
+                onFocus={()=>setFocused('budget')} onBlur={()=>setFocused('')}
                 placeholder="Ej: 2000" min={100}
-                style={inputStyle('budget')}
-                whileFocus={{ scale:1.005 }}
-              />
+                style={inputStyle('budget')} whileFocus={{ scale:1.005 }} />
             </div>
             <div>
               <label style={{ fontSize:'12px', color:'#9A9490', display:'block', marginBottom:'6px' }}>Período del informe *</label>
@@ -275,9 +240,7 @@ export default function SetupForm({ onSubmit, loading }: Props) {
           </motion.div>
         )}
 
-        <motion.button
-          onClick={handleSubmit}
-          disabled={loading}
+        <motion.button onClick={handleSubmit} disabled={loading}
           style={{
             width:'100%', padding:'16px', fontSize:'14px', letterSpacing:'0.08em',
             background:'#0A0A0A', color:'#F5F2ED', border:'none', cursor:'pointer',
@@ -285,17 +248,11 @@ export default function SetupForm({ onSubmit, loading }: Props) {
             position:'relative', overflow:'hidden',
           }}
           whileHover={{ background:'#1A1A1A', scale:1.005 }}
-          whileTap={{ scale:0.995 }}
-          transition={{ duration:0.15 }}
-        >
+          whileTap={{ scale:0.995 }}>
           <motion.div
-            style={{
-              position:'absolute', inset:0,
-              background:'linear-gradient(90deg,transparent,rgba(196,163,90,0.15),transparent)',
-            }}
+            style={{ position:'absolute', inset:0, background:'linear-gradient(90deg,transparent,rgba(196,163,90,0.15),transparent)' }}
             animate={{ x:['-100%','200%'] }}
-            transition={{ duration:2.5, repeat:Infinity, ease:'linear', repeatDelay:1 }}
-          />
+            transition={{ duration:2.5, repeat:Infinity, ease:'linear', repeatDelay:1 }} />
           <span style={{ position:'relative', zIndex:1 }}>
             {loading ? 'Generando informe…' : 'Generar informe ahora'}
           </span>
@@ -311,7 +268,7 @@ export default function SetupForm({ onSubmit, loading }: Props) {
           Demo · Datos simulados · No se almacena información real
         </p>
       </motion.div>
-
     </motion.div>
   )
 }
+'@ | Set-Content -Path "components\SetupForm.tsx" -Encoding UTF8
