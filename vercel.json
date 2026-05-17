@@ -1,0 +1,8 @@
+{
+  "framework": "nextjs",
+  "functions": {
+    "app/api/generate/route.ts": { "maxDuration": 60 },
+    "app/api/pdf/route.ts":      { "maxDuration": 60 },
+    "app/api/share/[id]/route.ts": { "maxDuration": 10 }
+  }
+}

@@ -1,0 +1,102 @@
+﻿@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --dot-color: rgba(180,165,140,0.22);
+    --grid-color: rgba(180,165,140,0.10);
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+  ::selection { background: #0A0A0A; color: #F5F2ED; }
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: #C4B49A; border-radius: 2px; }
+
+  body {
+    background-color: #F5F2ED;
+    background-image:
+      radial-gradient(circle, var(--dot-color) 1px, transparent 1px),
+      radial-gradient(ellipse 80% 60% at -5% -10%, rgba(196,163,90,0.10) 0%, transparent 55%),
+      radial-gradient(ellipse 60% 50% at 105% 105%, rgba(130,100,180,0.07) 0%, transparent 55%),
+      radial-gradient(ellipse 120% 60% at 50% -5%, rgba(250,240,220,0.7) 0%, transparent 45%);
+    background-size: 24px 24px, 100% 100%, 100% 100%, 100% 100%;
+    background-attachment: fixed;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
+    background-size: 96px 96px;
+    pointer-events: none;
+    z-index: 0;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 px-5 py-3
+           text-sm font-medium border border-border
+           text-muted transition-all duration-200
+           hover:bg-ink hover:text-cream hover:border-ink
+           active:scale-[0.98]
+           disabled:opacity-30 disabled:cursor-not-allowed;
+  }
+  .btn-primary {
+    @apply bg-ink text-cream border-ink hover:bg-[#2A2A2A] hover:border-[#2A2A2A];
+  }
+  .input-base {
+    @apply w-full bg-white/80 backdrop-blur-sm border border-border px-4 py-3
+           text-sm text-ink placeholder:text-muted
+           focus:outline-none focus:border-ink focus:bg-white transition-all duration-200;
+  }
+  .select-base {
+    @apply w-full bg-white/80 backdrop-blur-sm border border-border px-4 py-3
+           text-sm text-ink focus:outline-none focus:border-ink
+           transition-all duration-200 appearance-none cursor-pointer;
+  }
+  .card {
+    @apply bg-white/70 backdrop-blur-sm border border-border p-6
+           shadow-[0_1px_3px_rgba(0,0,0,0.04),0_8px_24px_rgba(0,0,0,0.04)];
+  }
+  .eyebrow {
+    @apply text-[10px] font-medium tracking-[0.12em] uppercase text-muted;
+  }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; } to { opacity: 1; }
+}
+@keyframes floatSlow {
+  0%,100% { transform: translateY(0) rotate(0deg); }
+  50%     { transform: translateY(-8px) rotate(1deg); }
+}
+
+.animate-fade-up  { animation: fadeUp  0.7s cubic-bezier(0.16,1,0.3,1) both; }
+.animate-fade-in  { animation: fadeIn  0.5s ease both; }
+.animate-float    { animation: floatSlow 5s ease-in-out infinite; }
+
+.delay-100 { animation-delay: 0.10s; }
+.delay-200 { animation-delay: 0.20s; }
+.delay-300 { animation-delay: 0.30s; }
+.delay-400 { animation-delay: 0.40s; }
+
+.shimmer {
+  background: linear-gradient(90deg,#EAE6DF 25%,#F5F0E8 50%,#EAE6DF 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.6s infinite;
+}
+@keyframes shimmer {
+  from { background-position: -200% 0; }
+  to   { background-position:  200% 0; }
+}
